@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symphony | Custom Audio Player</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-animation"></div>
+    <div class="player-container">
+
+        <!-- Header / Track Info -->
+        <div class="track-info">
+            <h1 id="track-title">Too Much For Me</h1>
+            <p id="track-artist">selker</p>
+        </div>
+
+        <!-- Audio Visualizer Canvas -->
+        <canvas id="audio-visualizer"></canvas>
+
+        <!-- Custom Audio Upload -->
+        <div class="file-upload-wrapper">
+            <label for="audio-upload" class="custom-file-upload">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="icon">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                Load Custom Audio
+            </label>
+            <input type="file" id="audio-upload" accept="audio/*">
+        </div>
+
+        <!-- Hidden Native Audio Element -->
+        <audio id="main-audio" crossorigin="anonymous" src="SELKER - Too Much For Me (Official Visualiser).mp3"></audio>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <span id="current-time">0:00</span>
+            <div class="progress-bar" id="progress-bar">
+                <div class="progress-filled" id="progress-filled"></div>
+            </div>
+            <span id="duration">0:00</span>
+        </div>
+
+        <!-- Primary Controls -->
+        <div class="controls-container">
+
+            <button class="control-btn secondary-btn" id="loop-btn" title="Toggle Loop">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="17 1 21 5 17 9"></polyline>
+                    <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                    <polyline points="7 23 3 19 7 15"></polyline>
+                    <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                </svg>
+            </button>
+
+            <button class="control-btn" id="skip-back-btn" title="Skip Backward 10s">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"></path>
+                </svg>
+            </button>
+
+            <button class="control-btn play-pause-btn" id="play-pause-btn" title="Play">
+                <svg id="play-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <svg id="pause-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none" class="hidden">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+            </button>
+
+            <button class="control-btn" id="skip-forward-btn" title="Skip Forward 10s">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M13 17l5-5-5-5M6 17l5-5-5-5"></path>
+                </svg>
+            </button>
+
+            <button class="control-btn secondary-btn" id="speed-btn" title="Playback Speed">
+                1x
+            </button>
+        </div>
+
+        <!-- Volume Control -->
+        <div class="volume-container">
+            <button class="control-btn small-btn" id="mute-btn" title="Mute/Unmute">
+                <svg id="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+                <svg id="muted-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="hidden">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+            </button>
+            <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="1">
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

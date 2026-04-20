@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symphony | Custom Audio Player</title>
+    <title>Sound API | Custom Audio Player</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -13,16 +13,15 @@
     <div class="background-animation"></div>
     <div class="player-container">
 
-        <!-- Header / Track Info -->
         <div class="track-info">
             <h1 id="track-title">Too Much For Me</h1>
             <p id="track-artist">selker</p>
         </div>
 
-        <!-- Audio Visualizer Canvas -->
+
         <canvas id="audio-visualizer"></canvas>
 
-        <!-- Custom Audio Upload -->
+
         <div class="file-upload-wrapper">
             <label for="audio-upload" class="custom-file-upload">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -36,10 +35,10 @@
             <input type="file" id="audio-upload" accept="audio/*">
         </div>
 
-        <!-- Hidden Native Audio Element -->
+
         <audio id="main-audio" crossorigin="anonymous" src="SELKER - Too Much For Me (Official Visualiser).mp3"></audio>
 
-        <!-- Progress Bar -->
+
         <div class="progress-container">
             <span id="current-time">0:00</span>
             <div class="progress-bar" id="progress-bar">
@@ -48,7 +47,7 @@
             <span id="duration">0:00</span>
         </div>
 
-        <!-- Primary Controls -->
+
         <div class="controls-container">
 
             <button class="control-btn secondary-btn" id="loop-btn" title="Toggle Loop">
@@ -90,7 +89,7 @@
             </button>
         </div>
 
-        <!-- Volume Control -->
+
         <div class="volume-container">
             <button class="control-btn small-btn" id="mute-btn" title="Mute/Unmute">
                 <svg id="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

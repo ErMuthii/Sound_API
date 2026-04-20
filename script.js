@@ -27,19 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("audio-visualizer");
     const canvasCtx = canvas.getContext("2d");
 
-    // State Variables
     let isPlaying = false;
     const playbackSpeeds = [1, 1.25, 1.5, 2, 0.5, 0.75];
     let speedIndex = 0;
 
-    // Audio Context Variables
+
     let audioCtx;
     let analyser;
     let source;
     let dataArray;
     let bufferLength;
 
-    // Helper: Format Time in MM:SS
     function formatTime(seconds) {
         if (isNaN(seconds)) return "0:00";
         const minutes = Math.floor(seconds / 60);
@@ -47,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
-    // Audio Visualizer Setup
+    // Added a visualizer so you can see the audio waves
     function initVisualizer() {
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -82,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i < bufferLength; i++) {
             const barHeight = dataArray[i] / 2;
 
-            // Map height to opacity of our accent color
+
             canvasCtx.fillStyle = `rgb(56, 189, 248)`;
             canvasCtx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
 
@@ -90,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Playback Core Functionality
+
     function togglePlayPause() {
         initVisualizer();
         if (audio.paused) {
@@ -108,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     playPauseBtn.addEventListener("click", togglePlayPause);
 
-    // Audio MetaData & Time Handling
+
     audio.addEventListener("loadedmetadata", () => {
         durationEl.textContent = formatTime(audio.duration);
     });
@@ -119,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
         progressFilled.style.width = `${progressPercent}%`;
     });
 
-    // Reset UI continuously when ended, unless looping
+
     audio.addEventListener("ended", () => {
         if (!audio.loop) {
             isPlaying = false;
@@ -130,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Click on progress bar to seek
+
     progressContainer.addEventListener("click", (e) => {
         const width = progressContainer.clientWidth;
         const clickX = e.offsetX;
@@ -138,7 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
         audio.currentTime = (clickX / width) * duration;
     });
 
-    // Skip Forward / Backward
     function skip(seconds) {
         audio.currentTime += seconds;
     }
@@ -146,13 +143,11 @@ document.addEventListener("DOMContentLoaded", () => {
     skipForwardBtn.addEventListener("click", () => skip(10));
     skipBackBtn.addEventListener("click", () => skip(-10));
 
-    // Loop Functionality
     loopBtn.addEventListener("click", () => {
         audio.loop = !audio.loop;
         loopBtn.classList.toggle("active", audio.loop);
     });
 
-    // Playback Speed
     speedBtn.addEventListener("click", () => {
         speedIndex = (speedIndex + 1) % playbackSpeeds.length;
         const nextSpeed = playbackSpeeds[speedIndex];
@@ -164,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Volume & Mute Functionality
+
     function setVolume(value) {
         audio.volume = value;
         volumeSlider.value = value;
@@ -178,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     volumeSlider.addEventListener("input", (e) => {
-        audio.muted = false; // Unmute if dragging slider
+        audio.muted = false;
         setVolume(e.target.value);
     });
 
@@ -195,21 +190,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // File Upload Functionality
+
     audioUpload.addEventListener("change", function (e) {
         const file = this.files[0];
         if (file) {
             const objectUrl = URL.createObjectURL(file);
             audio.src = objectUrl;
 
-            // Try to extract name
+
             let fileName = file.name;
-            // Remove extension
+
             fileName = fileName.replace(/\.[^/.]+$/, "");
             trackTitle.textContent = fileName.substring(0, 25) + (fileName.length > 25 ? "..." : "");
             trackArtist.textContent = "Local Audio File";
 
-            // Auto play
+
             initVisualizer();
             audio.play();
             isPlaying = true;
@@ -218,9 +213,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Keyboard controls
+
     document.addEventListener("keydown", (e) => {
-        // Prevent default logic for space to stop scrolling, only if we aren't focused on an input
+
         if (e.target.tagName.toLowerCase() !== 'input' && e.code === "Space") {
             e.preventDefault();
             togglePlayPause();
